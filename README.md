@@ -309,11 +309,6 @@ The app automatically manages profile data across two distinct screens:
 - **Independent actions**: Liking/disliking on one screen doesn't affect the other
 - **Persistent until restart**: Changes persist until you kill and restart the app
 
-**Demo Features:**
-- ✅ Consistent demo experience - same profiles every restart
-- ✅ No data corruption - fresh state guaranteed
-- ✅ Easy testing - no manual data clearing needed
-- ✅ Premium indicators - some profiles marked as "Premium NRI"
 
 ### Configuration
 

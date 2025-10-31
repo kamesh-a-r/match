@@ -69,7 +69,7 @@ fun ProfileScreen(navController: NavController, viewModel: ProfileViewModel) {
                     brush = Brush.linearGradient(
                         colors = listOf(
                             Color(0xFF20BF55), // green
-                            Color(0xFF01BAEF)  // blue
+                            Color(0xFF2A52BE)  // blue
                         ),
                         start = Offset.Zero,
                         end = Offset.Infinite
@@ -132,7 +132,7 @@ fun ProfileScreen(navController: NavController, viewModel: ProfileViewModel) {
                             Text(
                                 text = "No more profiles!",
                                 style = MaterialTheme.typography.headlineMedium,
-                                color = Color.White
+                                color = Color.Black
                             )
                         }
                     }
