@@ -1,38 +1,70 @@
-# Match -
+# Match
 
-A modern Android dating application built with Jetpack Compose featuring a swipeable card stack interface for browsing profiles.
+A modern Android dating application built with Jetpack Compose featuring dual navigation experiences: horizontal scrollable cards and interactive swipeable card stacks for browsing profiles.
 
-##  Features
+## Features
 
-- **Swipeable Card Stack**: Card interface with smooth swipe gestures
-- **Profile Browsing**: Browse through profiles with like/dislike actions
-- **Visual Feedback**: Real-time rotation and overlay effects during swipes
-- **Stacking Effects**: Configurable card stacking with depth perception
-- **Snackbar Notifications**: Instant feedback after each swipe action
-- **Auto Data Initialization**: Dummy profiles automatically loaded on first app launch
-- **Dual Profile Types**: Separate HOME and DAILY recommendation feeds
-- **Clean Architecture**: Separation of concerns with MVI pattern
-- **Unit Tests**: Comprehensive test coverage with MockK
+### User Experience
+- **Dual Screen Design**: Home screen with horizontal scrolling cards + Profile screen with swipeable card stack
+- **Smart Profile Management**: Separate profile states for HOME and DAILY screens with independent like/dislike actions
+- **Interactive Gestures**: Swipe left to dislike, right to like with smooth animations and visual feedback
+- **Comprehensive Navigation**: Seamless transitions between list view, detail view, and daily matches
+- **Personalized Feedback**: Custom snackbar messages with user names and emojis
 
-##  Architecture
+### Technical Features
+- **Modern Architecture**: Clean Architecture with MVVM pattern and reactive programming
+- **Database Integration**: Room database with automatic demo data population and state management
+- **Dependency Injection**: Hilt for clean dependency management across all layers
+- **Reactive UI**: StateFlow/Flow-based state management with Compose integration
+- **Comprehensive Testing**: Unit tests with MockK, Turbine, and Coroutines Test
+- **Type Safety**: Sealed classes for events and strong typing throughout
 
-The app follows **Clean Architecture** principles with **MVI (Model-View-Intent)** pattern:
+## Architecture
+
+The app follows **Clean Architecture** principles with **MVVM** pattern and reactive state management:
 
 ```
 app/
-├── data/                    # Data layer
-│   ├── local/              # Local data sources (Room DB)
-│   └── repository/         # Repository implementations
-├── domain/                  # Domain layer
-│   ├── model/              # Domain models
-│   ├── repository/         # Repository interfaces
-│   └── usecase/            # Business logic use cases
-└── presentation/            # Presentation layer
-    ├── cardStack/          # Card stack UI components
-    │   ├── model/          # UI models (DragValue, StackFrom)
-    │   └── view/           # Composables (SwipeableCard, TopStackedCardView)
-    ├── home/               # Home screen
-    └── profile/            # Profile screen
+├── data/                           # Data layer
+│   ├── local/                     # Local data sources (Room DB)
+│   │   ├── AppDatabase.kt         # Room database with auto-population
+│   │   ├── ProfileDao.kt          # Basic profile operations
+│   │   ├── ProfileWithTypeDao.kt  # Screen-specific profile operations
+│   │   └── Converters.kt          # Type converters for Room
+│   └── repository/                # Repository implementations
+│       └── ProfileRepositoryImpl.kt
+├── domain/                         # Domain layer
+│   ├── model/                     # Domain models
+│   │   ├── Profile.kt             # Core profile entity
+│   │   ├── ProfileType.kt         # HOME/DAILY screen types
+│   │   └── ProfileWithType.kt     # Screen-specific profile data
+│   ├── repository/                # Repository interfaces
+│   │   └── ProfileRepository.kt
+│   └── usecase/                   # Business logic use cases
+│       ├── ProfileUseCases.kt     # Use case facade
+│       ├── GetProfilesByTypeUseCase.kt
+│       ├── LikeProfileUseCase.kt
+│       └── [Other use cases]
+├── presentation/                   # Presentation layer
+│   ├── home/                      # Home screen (horizontal cards)
+│   │   ├── components/            # Home-specific components
+│   │   ├── view/                  # Home screen composable
+│   │   └── viewmodel/             # Home ViewModel
+│   ├── profile/                   # Profile screen (swipeable stack)
+│   │   ├── model/                 # Profile events & state
+│   │   ├── view/                  # Profile screen composable
+│   │   └── viewmodel/             # Profile ViewModel
+│   ├── details/                   # Profile detail view
+│   │   └── view/                  # Detail screen composable
+│   ├── widget/cardStack/          # Reusable card stack components
+│   │   ├── model/                 # DragValue, StackFrom enums
+│   │   └── view/                  # SwipeableCard, TopStackedCardView
+│   └── navigation/                # App navigation
+│       ├── NavGraph.kt            # Navigation setup
+│       └── Screen.kt              # Screen definitions
+└── di/                            # Dependency injection
+    ├── DatabaseModule.kt          # Database providers
+    └── RepositoryModule.kt        # Repository & use case providers
 ```
 
 ## Card Stack Component
@@ -178,35 +210,52 @@ enum class DragValue {
 - `velocityThreshold`: Minimum fling velocity in pixels (default: 400dp)
 - Cards snap back to center if thresholds aren't met
 
-##  Tech Stack
+## Tech Stack
 
-- **Language**: Kotlin
-- **UI**: Jetpack Compose
-- **Architecture**: Clean Architecture + MVI
-- **Dependency Injection**: Hilt (assumed)
-- **Database**: Room
+- **Language**: Kotlin 2.2.21
+- **UI**: Jetpack Compose 2025.10.01 (Material 3)
+- **Architecture**: Clean Architecture + MVVM
+- **Dependency Injection**: Hilt 2.57.2
+- **Database**: Room 2.8.3
+- **Image Loading**: Coil 2.7.0
 - **Coroutines**: Kotlin Coroutines + Flow
-- **Testing**: JUnit 4, MockK, Coroutines Test
+- **Testing**: JUnit 4, MockK 1.14.6, Turbine 1.2.1, Coroutines Test
 
-## Dependencies
+## Key Dependencies
 
-```kotlin
-// Compose
-implementation("androidx.compose.ui:ui")
-implementation("androidx.compose.material3:material3")
-implementation("androidx.compose.foundation:foundation")
+Based on `gradle/libs.versions.toml`:
 
-// Coroutines
-implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android")
+```toml
+[versions]
+kotlin = "2.2.21"
+composeBom = "2025.10.01"
+hilt = "2.57.2"
+room = "2.8.3"
+coil = "2.7.0"
+mockk = "1.14.6"
+gson = "2.13.2"
+turbine = "1.2.1"
 
-// Room
-implementation("androidx.room:room-runtime")
-implementation("androidx.room:room-ktx")
+[libraries]
+# Compose BOM
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 
-// Testing
-testImplementation("junit:junit:4.13.2")
-testImplementation("io.mockk:mockk:1.13.8")
-testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
+# Hilt
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+
+# Room
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+
+# Image Loading
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+
+# Testing
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 ```
 
 ## Testing
@@ -246,20 +295,25 @@ See [Test README](app/src/test/README.md) for detailed testing documentation.
 
 ### Data Initialization
 
-The app automatically reloads fresh profile data every time it opens:
+The app automatically manages profile data across two distinct screens:
 
-- **5 profiles**: Loaded from `AppDatabase.prepopulate()`
-- **Fresh data on every launch**: Database is cleared and repopulated when app opens
-- **Consistent experience**: Same profiles appear each time you restart the app
-- **Both HOME and DAILY**: Same profiles available in both feeds
+**Database Strategy:**
+- **Two-table design**: `profiles` table (master data) + `profile_with_type` table (screen-specific copies)
+- **Screen independence**: HOME and DAILY screens maintain separate profile states
+- **Fresh data on launch**: Database cleared and repopulated on every app open via `DatabaseModule.onOpen()`
+- **5 demo profiles**: Ananya, Rachel, Priya, Neha, Sofia with varied characteristics
 
-The initialization happens in the Room database `onOpen()` callback in `DatabaseModule.kt`.
+**Profile Distribution:**
+- **HOME screen**: Horizontal scrollable cards with live count indicators
+- **DAILY screen**: Swipeable card stack for focused matching
+- **Independent actions**: Liking/disliking on one screen doesn't affect the other
+- **Persistent until restart**: Changes persist until you kill and restart the app
 
-**Behavior:**
--  Data resets every time you kill and reopen the app
--  Swipes are temporary - profiles return on app restart
--  Perfect for testing and demo purposes
--  No need to clear app data manually
+**Demo Features:**
+- ✅ Consistent demo experience - same profiles every restart
+- ✅ No data corruption - fresh state guaranteed
+- ✅ Easy testing - no manual data clearing needed
+- ✅ Premium indicators - some profiles marked as "Premium NRI"
 
 ### Configuration
 
@@ -277,43 +331,70 @@ TopStackedCardView(
 )
 ```
 
-##  Code Examples
+## Screen Examples
 
-### Basic Integration
+### Home Screen (Horizontal Cards)
+
+The home screen displays profiles in horizontal scrollable cards with live counts:
 
 ```kotlin
 @Composable
-fun ProfileBrowser(profiles: List<Profile>) {
-    var currentProfiles by remember { mutableStateOf(profiles) }
+fun HomeScreen(navController: NavController, viewModel: HomeViewModel) {
+    val state by viewModel.state.collectAsState()
     
-    TopStackedCardView(
-        profiles = currentProfiles,
-        onSwiped = { profile, direction ->
-            // Handle swipe
-            currentProfiles = currentProfiles.filter { it.id != profile.id }
+    // Header shows live profile count
+    Text("${state.profiles.size} Profiles pending with me")
+    
+    // Premium indicator badge  
+    Text("${state.profiles.count { it.isPremiumNri }} NEW")
+    
+    LazyRow {
+        items(state.profiles, key = { it.id }) { profile ->
+            HomeProfileCard(
+                profile = profile,
+                onLike = {
+                    // Show personalized snackbar
+                    snackbarHostState.showSnackbar("💖 Great choice! ${profile.name} has been liked")
+                    viewModel.onEvent(ProfileEvent.LikeProfile(profile))
+                },
+                onDislike = {
+                    snackbarHostState.showSnackbar("👋 No worries! You passed on ${profile.name}")
+                    viewModel.onEvent(ProfileEvent.DislikeProfile(profile))
+                },
+                onClick = {
+                    // Navigate to detail view
+                    viewModel.onEvent(ProfileEvent.SelectProfile(profile))
+                    navController.navigate(Screen.ProfileDetailsScreen.route)
+                }
+            )
         }
-    )
+    }
 }
 ```
 
-### With ViewModel
+### Profile Screen (Swipeable Stack)
+
+The daily matches screen uses the swipeable card stack:
 
 ```kotlin
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
+fun ProfileScreen(navController: NavController, viewModel: ProfileViewModel) {
     val state by viewModel.state.collectAsState()
     
     TopStackedCardView(
         profiles = state.profiles,
+        visibleCount = 3,
+        infiniteLoop = false,
         onSwiped = { profile, direction ->
             when (direction) {
-                DragValue.Left -> viewModel.dislikeProfile(profile)
-                DragValue.Right -> viewModel.likeProfile(profile)
+                DragValue.Left -> viewModel.onEvent(ProfileEvent.DislikeProfile(profile))
+                DragValue.Right -> viewModel.onEvent(ProfileEvent.LikeProfile(profile))
                 else -> {}
             }
         },
         onCardClicked = { profile ->
-            viewModel.selectProfile(profile)
+            viewModel.onEvent(ProfileEvent.SelectProfile(profile))
+            navController.navigate(Screen.ProfileDetailsScreen.route)
         }
     )
 }
