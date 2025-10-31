@@ -47,12 +47,12 @@ object DatabaseModule {
             "match_database"
         )
             // Allow destructive migration for demo (loses data but prevents crashes)
-            .fallbackToDestructiveMigration(false)
+            .fallbackToDestructiveMigration(true)
             .addCallback(object : RoomDatabase.Callback() {
                 // Called only on first install
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
-                    AppDatabase.prepopulate(db)
+//                    AppDatabase.prepopulate(db)
                 }
                 
                 // Called every time app opens (including after kill/restart)

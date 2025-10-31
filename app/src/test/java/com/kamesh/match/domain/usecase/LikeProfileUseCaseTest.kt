@@ -7,6 +7,7 @@ import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
+import java.util.UUID
 
 class LikeProfileUseCaseTest {
 
@@ -16,7 +17,7 @@ class LikeProfileUseCaseTest {
     private val testProfile = Profile(
         name = "Test User",
         age = 25,
-        id = 1,
+        id = UUID.randomUUID().toString(),
         height = "5'6\"",
         profession = "Engineer",
         star = "Aries",

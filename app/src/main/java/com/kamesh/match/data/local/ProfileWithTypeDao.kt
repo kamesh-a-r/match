@@ -26,7 +26,7 @@ interface ProfileWithTypeDao {
     fun getProfilesByType(type: ProfileType): Flow<List<ProfileWithType>>
 
     @Query("DELETE FROM profile_with_type WHERE profileId = :profileId AND type = :type")
-    suspend fun deleteProfileByIdAndType(profileId: Int, type: ProfileType)
+    suspend fun deleteProfileByIdAndType(profileId: String, type: ProfileType)
 
     @Query("SELECT COUNT(*) FROM profile_with_type WHERE type = :type")
     suspend fun getProfileCountByType(type: ProfileType): Int

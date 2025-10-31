@@ -2,6 +2,7 @@ package com.kamesh.match.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.UUID
 
 /**
  * Entity that stores profiles with their type (HOME or DAILY).
@@ -9,9 +10,8 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "profile_with_type")
 data class ProfileWithType(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val profileId: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val profileId: String,
     val profileName: String,
     val type: ProfileType,
     val age: Int,

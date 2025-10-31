@@ -12,6 +12,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import java.util.UUID
 
 class GetProfilesByTypeUseCaseTest {
 
@@ -22,7 +23,7 @@ class GetProfilesByTypeUseCaseTest {
         Profile(
             name = "Test User 1",
             age = 25,
-            id = 1,
+            id = UUID.randomUUID().toString(),
             height = "5'6\"",
             profession = "Engineer",
             star = "Aries",

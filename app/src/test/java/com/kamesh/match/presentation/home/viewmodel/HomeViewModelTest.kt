@@ -28,6 +28,7 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import java.util.UUID
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModelTest {
@@ -47,7 +48,7 @@ class HomeViewModelTest {
         Profile(
             name = "Test User 1",
             age = 25,
-            id = 1,
+            id = UUID.randomUUID().toString(),
             height = "5'6\"",
             profession = "Engineer",
             star = "Aries",
@@ -62,7 +63,7 @@ class HomeViewModelTest {
         Profile(
             name = "Test User 2",
             age = 28,
-            id = 2,
+            id = UUID.randomUUID().toString(),
             height = "5'8\"",
             profession = "Doctor",
             star = "Leo",

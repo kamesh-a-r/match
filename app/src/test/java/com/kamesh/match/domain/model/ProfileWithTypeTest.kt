@@ -2,6 +2,7 @@ package com.kamesh.match.domain.model
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.util.UUID
 
 /**
  * Unit tests for ProfileWithType model class
@@ -21,7 +22,7 @@ class ProfileWithTypeTest {
     private val testProfile = Profile(
         name = "Test User",
         age = 25,
-        id = 1,
+        id = UUID.randomUUID().toString(),
         height = "5'6\"",
         profession = "Engineer",
         star = "Aries",
@@ -43,7 +44,7 @@ class ProfileWithTypeTest {
         // Given: Create a ProfileWithType with test data
         val profileWithType = ProfileWithType(
             id = 1,
-            profileId = 1,
+            profileId = UUID.randomUUID().toString(),
             profileName = "Test User",
             type = ProfileType.HOME,
             age = 25,

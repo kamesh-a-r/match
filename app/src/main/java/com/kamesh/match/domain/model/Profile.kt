@@ -2,13 +2,13 @@ package com.kamesh.match.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.UUID
 
 @Entity(tableName = "profiles")
 data class Profile(
-    @PrimaryKey
+    @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val name: String,
     val age: Int,
-    val id: Int,
     val height: String,
     val profession: String,
     val star: String,

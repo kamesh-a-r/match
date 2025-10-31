@@ -8,9 +8,6 @@ import com.google.gson.Gson
 import com.kamesh.match.domain.model.Profile
 import com.kamesh.match.domain.model.ProfileType
 import com.kamesh.match.domain.model.ProfileWithType
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 /**
  * Room Database for the Match App
@@ -24,7 +21,7 @@ import kotlinx.coroutines.launch
  * - Resets to fresh data every app restart (for demo purposes)
  * - Uses TypeConverters to handle complex data types like Lists
  */
-@Database(entities = [Profile::class, ProfileWithType::class], version = 5, exportSchema = false)
+@Database(entities = [Profile::class, ProfileWithType::class], version = 8, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -59,16 +56,6 @@ abstract class AppDatabase : RoomDatabase() {
         }
         
         /**
-         * Initial population of database on first app install
-         * Runs asynchronously since no UI is waiting for this data yet
-         */
-        fun prepopulate(db: SupportSQLiteDatabase) {
-            CoroutineScope(Dispatchers.IO).launch {
-                insertProfiles(db)
-            }
-        }
-        
-        /**
          * Insert static demo profiles into the database
          * 
          * Creates 5 sample profiles with different characteristics:
@@ -87,7 +74,6 @@ abstract class AppDatabase : RoomDatabase() {
                 Profile(
                     name = "Ananya Sharma",
                     age = 26,
-                    id = 1,
                     height = "5'6\"",
                     profession = "UI/UX Designer",
                     star = "Libra",
@@ -106,7 +92,6 @@ abstract class AppDatabase : RoomDatabase() {
                 Profile(
                     name = "Rachel Thomas",
                     age = 30,
-                    id = 2,
                     height = "5'7\"",
                     profession = "iOS Developer",
                     star = "Aries",
@@ -121,7 +106,6 @@ abstract class AppDatabase : RoomDatabase() {
                 Profile(
                     name = "Priya Reddy",
                     age = 25,
-                    id = 3,
                     height = "5'5\"",
                     profession = "Web Developer",
                     star = "Virgo",
@@ -136,7 +120,6 @@ abstract class AppDatabase : RoomDatabase() {
                 Profile(
                     name = "Neha Patel",
                     age = 29,
-                    id = 4,
                     height = "5'8\"",
                     profession = "Data Analyst",
                     star = "Cancer",
@@ -157,7 +140,6 @@ abstract class AppDatabase : RoomDatabase() {
                 Profile(
                     name = "Sofia D’Souza",
                     age = 27,
-                    id = 5,
                     height = "5'6\"",
                     profession = "AI Engineer",
                     star = "Scorpio",
@@ -188,7 +170,7 @@ abstract class AppDatabase : RoomDatabase() {
                     INSERT INTO profiles 
                     (id, name, age, height, profession, star, religion, location, isVerified, isPremiumNri, imageUrl, attachments, photoCount) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    """.trimIndent(),
+                    """,
                     arrayOf<Any?>(
                         profile.id,
                         profile.name,
@@ -212,7 +194,7 @@ abstract class AppDatabase : RoomDatabase() {
                     INSERT INTO profile_with_type 
                     (profileId, profileName, type, age, height, profession, star, religion, location, isVerified, isPremiumNri, imageUrl, attachments, photoCount) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    """.trimIndent(),
+                    """,
                     arrayOf<Any?>(
                         profile.id,
                         profile.name,
@@ -237,7 +219,7 @@ abstract class AppDatabase : RoomDatabase() {
                     INSERT INTO profile_with_type 
                     (profileId, profileName, type, age, height, profession, star, religion, location, isVerified, isPremiumNri, imageUrl, attachments, photoCount) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    """.trimIndent(),
+                    """,
                     arrayOf<Any?>(
                         profile.id,
                         profile.name,
