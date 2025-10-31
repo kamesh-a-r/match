@@ -45,6 +45,23 @@ import com.kamesh.match.presentation.widget.cardStack.model.StackFrom
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
+/**
+ * A composable that displays a single card that can be swiped left or right.
+ * It's designed to be part of a card stack, handling its own position, scale, and alpha
+ * based on its index in the stack. Only the top card is interactive.
+ *
+ * @param profile The [Profile] data to display on the card.
+ * @param index The zero-based index of this card in the stack. Used to calculate visual properties like scale and translation for cards behind the top one.
+ * @param isTopCard A boolean indicating if this is the card at the top of the stack, which is the only one that can be swiped.
+ * @param visibleCount The total number of cards visible in the stack. Used to determine the z-index.
+ * @param stackFrom An enum indicating the direction from which the stacked cards should appear (e.g., from the top, bottom).
+ * @param translationInterval The distance in Dp between each card in the stack.
+ * @param scaleInterval The scaling factor difference between each card in the stack. e.g., if 0.9f, the second card will be 0.9 times the size of the first.
+ * @param swipeThreshold A fraction of the screen width that the card must be dragged to trigger a swipe.
+ * @param density The screen density, used for converting Dp to Px for gesture calculations.
+ * @param onSwiped A callback invoked when the card has been successfully swiped and settled to the left or right. It provides the [DragValue] indicating the direction.
+ * @param onCardClicked A callback invoked when the card is clicked.
+ */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SwipeableCard(

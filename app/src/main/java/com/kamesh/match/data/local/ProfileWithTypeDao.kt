@@ -9,6 +9,13 @@ import com.kamesh.match.domain.model.ProfileType
 import com.kamesh.match.domain.model.ProfileWithType
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Data Access Object (DAO) for the `profile_with_type` table.
+ *
+ * This interface provides methods for interacting with the local database storage
+ * of profiles that have been categorized by a specific type (e.g., accepted, declined).
+ * It supports operations like inserting, querying, and deleting profiles based on their type.
+ */
 @Dao
 interface ProfileWithTypeDao {
 

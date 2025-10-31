@@ -17,6 +17,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/**
+ * Dagger Hilt module that provides singleton instances of repositories and use cases
+ * related to user profiles. This module is installed in the [SingletonComponent],
+ * meaning the provided dependencies will have an application-wide scope.
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {

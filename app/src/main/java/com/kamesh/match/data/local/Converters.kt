@@ -5,6 +5,11 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.kamesh.match.domain.model.ProfileType
 
+/**
+ * Type converters for Room to allow storing complex data types in the database.
+ * This class provides methods to convert lists of strings and enum types to and from
+ * formats that can be persisted by Room.
+ */
 class Converters {
     @TypeConverter
     fun fromString(value: String): List<String> {

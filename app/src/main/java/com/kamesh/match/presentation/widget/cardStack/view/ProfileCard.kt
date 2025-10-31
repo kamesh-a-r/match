@@ -40,6 +40,17 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.kamesh.match.domain.model.Profile
 
+/**
+ * A composable that displays a user profile in a card format.
+ * This card is typically used in a swipe-to-like/dislike interface.
+ * It shows the user's image, name, age, location, and other details,
+ * along with action buttons for liking and disliking.
+ *
+ * @param profile The [Profile] data object containing the user's information to display.
+ * @param modifier The [Modifier] to be applied to the card.
+ * @param onDislike A lambda function to be invoked when the user clicks the dislike button.
+ * @param onLike A lambda function to be invoked when the user clicks the like button.
+ */
 @Composable
 fun ProfileCard(
     profile: Profile,

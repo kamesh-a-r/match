@@ -11,6 +11,21 @@ import com.kamesh.match.presentation.profile.view.ProfileScreen
 import com.kamesh.match.presentation.profile.viewmodel.ProfileViewModel
 import androidx.compose.runtime.collectAsState
 
+/**
+ * Composable function that defines the application's navigation graph.
+ *
+ * It sets up a [NavHost] with all the possible navigation destinations (screens)
+ * and manages the navigation controller. This component also instantiates and scopes
+ * ViewModels like [HomeViewModel] and [ProfileViewModel] to the navigation graph,
+ * allowing them to be shared across multiple composables within the graph.
+ *
+ * The graph includes the following screens:
+ * - [Screen.HomeScreen]: The starting destination of the app.
+ * - [Screen.ProfileScreen]: A screen to display a user's own profile.
+ * - [Screen.ProfileDetailsScreen]: A screen to display details of a selected profile.
+ *   This screen intelligently uses either the [HomeViewModel] or the [ProfileViewModel]
+ *   based on the navigation origin to display the correct profile data.
+ */
 @Composable
 fun NavGraph() {
     val navController = rememberNavController()

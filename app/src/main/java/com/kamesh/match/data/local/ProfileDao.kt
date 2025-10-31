@@ -8,6 +8,10 @@ import androidx.room.Query
 import com.kamesh.match.domain.model.Profile
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Data Access Object (DAO) for the profile table.
+ * Provides methods for accessing and manipulating profile data in the local database.
+ */
 @Dao
 interface ProfileDao {
 

@@ -10,6 +10,17 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+/**
+ * Concrete implementation of the [ProfileRepository] interface.
+ *
+ * This class is responsible for managing profile data, acting as a single source of truth.
+ * It interacts with local data sources (DAOs) to fetch, store, and delete profile information.
+ * The `like` and `dislike` operations are currently placeholders and will eventually be
+ * integrated with a remote API.
+ *
+ * @param profileDao The Data Access Object for general profile operations.
+ * @param profileWithTypeDao The Data Access Object for operations that filter profiles by a specific [ProfileType].
+ */
 class ProfileRepositoryImpl @Inject constructor(
     private val profileDao: ProfileDao,
     private val profileWithTypeDao: ProfileWithTypeDao

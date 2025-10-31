@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 
 
 /**
- * A Tinder-style swipeable card stack composable that displays profiles in a stacked layout.
+ * A swipeable card stack composable that displays profiles in a stacked layout.
  *
  * This composable creates a visually appealing card stack where:
  * - The top card is fully interactive and can be swiped left (dislike) or right (like)

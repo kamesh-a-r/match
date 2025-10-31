@@ -38,11 +38,6 @@ import com.kamesh.match.presentation.profile.model.ProfileEvent
 fun ProfileScreen(navController: NavController, viewModel: ProfileViewModel) {
     val state by viewModel.state.collectAsState()
 
-//    LaunchedEffect(state.selectedProfile) {
-//        if (state.selectedProfile != null) {
-//            navController.navigate(Screen.ProfileDetailsScreen.route)
-//        }
-//    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -109,7 +104,6 @@ fun ProfileScreen(navController: NavController, viewModel: ProfileViewModel) {
                                         DragValue.Right -> viewModel.onEvent(ProfileEvent.LikeProfile(profile))
                                         else -> {}
                                     }
-//                                    viewModel.onEvent(ProfileEvent.CardSwiped)
                                 },
                                 onCardClicked = { profile ->
                                     viewModel.onEvent(ProfileEvent.SelectProfile(profile))

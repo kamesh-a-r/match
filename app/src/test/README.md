@@ -126,32 +126,32 @@ fun `getProfilesByType should return profiles for HOME type`() = runTest {
 ## Test Scenarios Covered
 
 ### HomeViewModel
-- ✅ Initial loading state
-- ✅ Load HOME profiles on initialization
-- ✅ Select profile updates state
-- ✅ Like profile calls correct use cases
-- ✅ Dislike profile calls correct use cases
-- ✅ Clear profile selection
+- Initial loading state
+- Load HOME profiles on initialization
+- Select profile updates state
+- Like profile calls correct use cases
+- Dislike profile calls correct use cases
+- Clear profile selection
 
 ### ProfileViewModel
-- ✅ Initial loading state
-- ✅ Load DAILY profiles on initialization
-- ✅ Select profile updates state
-- ✅ Like profile with DAILY type
-- ✅ Dislike profile with DAILY type
-- ✅ Clear profile selection
+- Initial loading state
+- Load DAILY profiles on initialization
+- Select profile updates state
+- Like profile with DAILY type
+- Dislike profile with DAILY type
+- Clear profile selection
 
 ### Repository
-- ✅ Get all profiles
-- ✅ Get profiles by type (HOME/DAILY)
-- ✅ Remove profile by type
-- ✅ Empty list handling
+- Get all profiles
+- Get profiles by type (HOME/DAILY)
+- Remove profile by type
+- Empty list handling
 
 ### Use Cases
-- ✅ GetProfilesByType for both HOME and DAILY
-- ✅ LikeProfile invocation
-- ✅ DislikeProfile invocation
-- ✅ RemoveProfileByType for both types
+- GetProfilesByType for both HOME and DAILY
+- LikeProfile invocation
+- DislikeProfile invocation
+- RemoveProfileByType for both types
 
 ## Best Practices
 

@@ -1,10 +1,10 @@
-# Match - Tinder-Style Dating App
+# Match -
 
 A modern Android dating application built with Jetpack Compose featuring a swipeable card stack interface for browsing profiles.
 
-## 📱 Features
+##  Features
 
-- **Swipeable Card Stack**: Tinder-style card interface with smooth swipe gestures
+- **Swipeable Card Stack**: Card interface with smooth swipe gestures
 - **Profile Browsing**: Browse through profiles with like/dislike actions
 - **Visual Feedback**: Real-time rotation and overlay effects during swipes
 - **Stacking Effects**: Configurable card stacking with depth perception
@@ -14,7 +14,7 @@ A modern Android dating application built with Jetpack Compose featuring a swipe
 - **Clean Architecture**: Separation of concerns with MVI pattern
 - **Unit Tests**: Comprehensive test coverage with MockK
 
-## 🏗️ Architecture
+##  Architecture
 
 The app follows **Clean Architecture** principles with **MVI (Model-View-Intent)** pattern:
 
@@ -35,11 +35,11 @@ app/
     └── profile/            # Profile screen
 ```
 
-## 🎴 Card Stack Component
+## Card Stack Component
 
 ### Overview
 
-The card stack component provides a Tinder-style swipeable interface for browsing profiles. It features:
+The card stack component provides a swipeable interface for browsing profiles. It features:
 
 - **Gesture-based Interaction**: Swipe left to dislike, right to like
 - **Visual Depth**: Cards stack with scale and translation effects
@@ -178,7 +178,7 @@ enum class DragValue {
 - `velocityThreshold`: Minimum fling velocity in pixels (default: 400dp)
 - Cards snap back to center if thresholds aren't met
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Language**: Kotlin
 - **UI**: Jetpack Compose
@@ -188,7 +188,7 @@ enum class DragValue {
 - **Coroutines**: Kotlin Coroutines + Flow
 - **Testing**: JUnit 4, MockK, Coroutines Test
 
-## 📦 Dependencies
+## Dependencies
 
 ```kotlin
 // Compose
@@ -209,7 +209,7 @@ testImplementation("io.mockk:mockk:1.13.8")
 testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
 ```
 
-## 🧪 Testing
+## Testing
 
 Comprehensive unit tests with MockK for all layers:
 
@@ -231,7 +231,7 @@ Run tests:
 
 See [Test README](app/src/test/README.md) for detailed testing documentation.
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Android Studio Hedgehog or later
@@ -255,18 +255,11 @@ The app automatically reloads fresh profile data every time it opens:
 
 The initialization happens in the Room database `onOpen()` callback in `DatabaseModule.kt`.
 
-**Profile Data Includes:**
-- Ananya Sharma (26, UI/UX Designer, Chennai)
-- Rachel Thomas (30, iOS Developer, Bengaluru) - Premium NRI
-- Priya Reddy (25, Web Developer, Hyderabad)
-- Neha Patel (29, Data Analyst, Pune)
-- Sofia D'Souza (27, AI Engineer, Mumbai) - Premium NRI
-
 **Behavior:**
-- ✅ Data resets every time you kill and reopen the app
-- ✅ Swipes are temporary - profiles return on app restart
-- ✅ Perfect for testing and demo purposes
-- ✅ No need to clear app data manually
+-  Data resets every time you kill and reopen the app
+-  Swipes are temporary - profiles return on app restart
+-  Perfect for testing and demo purposes
+-  No need to clear app data manually
 
 ### Configuration
 
@@ -284,7 +277,7 @@ TopStackedCardView(
 )
 ```
 
-## 📝 Code Examples
+##  Code Examples
 
 ### Basic Integration
 
@@ -339,7 +332,7 @@ TopStackedCardView(
 )
 ```
 
-## 🎨 Customization
+##  Customization
 
 ### Custom Stacking Direction
 
@@ -369,33 +362,5 @@ Modify `SwipeableCard.kt` to customize:
 - Overlay alpha and colors (line 200-212)
 - Scale and translation effects (line 116-124)
 
-## 🐛 Troubleshooting
 
-### Snackbar Hidden Behind Cards
-**Solution**: Ensure `zIndex(Float.MAX_VALUE)` is applied to SnackbarHost (already implemented)
 
-### Cards Not Swiping
-**Check**:
-- `isTopCard` is true for the top card
-- `swipeThreshold` isn't too high (default: 0.3f)
-- Gesture conflicts with parent scrollable containers
-
-### Performance Issues
-**Optimize**:
-- Reduce `visibleCount` (default: 3)
-- Use `key(profile.id)` for efficient recomposition
-- Avoid heavy operations in swipe callbacks
-
-## 📄 License
-
-[Add your license here]
-
-## 👥 Contributors
-
-[Add contributors here]
-
-## 🔗 Resources
-
-- [Jetpack Compose Documentation](https://developer.android.com/jetpack/compose)
-- [AnchoredDraggable API](https://developer.android.com/reference/kotlin/androidx/compose/foundation/gestures/AnchoredDraggableState)
-- [Clean Architecture Guide](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
